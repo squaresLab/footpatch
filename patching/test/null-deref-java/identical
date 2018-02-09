@@ -1,0 +1,10 @@
+--- /home/vagrant/infer/patching/CANONICAL_EXAMPLE/Example.java	2016-12-31 02:02:56.465216143 -0500
+--- /home/vagrant/infer/patching/CANONICAL_EXAMPLE/Example.java	2016-12-31 02:02:56.465216143 -0500
+@@ -25,6 +25,7 @@
+         Node nSafe = new Node (); // Used to be null, but doesn't mean to be
+         Node nUnsafe = null;
+         String res;
++    checkGuardedBy(nUnsafe != null);
+         res = visitMethodInvocationUnsafe(nUnsafe);
+         System.out.println(res);
+         res = visitMethodInvocationSafe(nSafe);

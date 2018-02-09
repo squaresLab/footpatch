@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Unfortunately, we can't reference the infer install dir from CONFIG 
+# relative to this path, because it is invoked as an absolute path
+# from within Infer. So let MERGE.sh set it in the installed directory.
+
+INFER=$INFER_PLACEHOLDER # this variable gets replaced according to CONFIG
+
+cd $INFER/patching/rename
+
+java -cp $INFER/patching/rename/javaparser-core-3.0.0-RC.3.jar: Rename "$1" "$2" "$3"

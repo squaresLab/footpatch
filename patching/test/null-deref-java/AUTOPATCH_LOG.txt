@@ -1,0 +1,5 @@
+[+] Running Infer to find bugs and candidate patches
+[+] Exit status: 0
+[+] Success, continuing... 
+[+] Copying infer-out
+[+] Initiate AUTOPATCH!
