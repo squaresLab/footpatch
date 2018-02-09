@@ -2,7 +2,6 @@
 
 INFER=infer-linux64-v0.9.3
 
-
 # Download infer here.
 git clone https://github.com/squaresLab/infer-linux64-v0.9.3
 rm -rf ./infer-linux64-v0.9.3/.git
@@ -14,11 +13,10 @@ printf "#\!/bin/bash\n\nINFER="$(pwd)/${INFER}"\n" > CONFIG
 ./MERGE.sh
 
 # configure and make infer. ASSUMES OPAM SWITCH AND DEPS WORK.
+cp build-infer.sh $INFER/
 cd $INFER
 ./build-infer.sh
 cd ..
 
 # Make test so that rename is built
 make -C $INFER/patching/test/null-deref-java test
-
-echo "Think about using git init to track file changes if developing!"
