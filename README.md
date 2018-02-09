@@ -1,84 +1,138 @@
-# Install
+# Build from source
 
-The basic procedure is:
+It is recommended you use the VM image with pre-built support for source
+builds. Dependencies for olders versions of Infer can (and have) broken or
+disappeared, and can cause building from source to be problematic. 
 
-Download the pre-build clang version of Infer v0.9.3 to "SOME_DIR"
+If you do not want to go this route, here is some guidance, but it may become
+outdated.  Building is only tested on Ubuntu 14.04 and Infer v0.9.3.  There is
+no support for other versions of Infer at this time.
 
-`https://github.com/facebook/infer/releases/download/v0.9.3/infer-linux64-v0.9.3.tar.xz`
+If you have all the dependencies installed, running `./SETUP.sh` should be
+enough.
 
-Go to "SOME_DIR", do `./configure`, `make` (assuming opam switch/dependencies are installed with `build-infer.sh`)
-
-
-## The for footpatch:
-
-Put "SOME_DIR" in `CONFIG`
-
-Run `MERGE.sh`, which copies footpatch and other files
-
-Do `./configure` and `make` again
-
-Test it by going to `patching/test/null-deref-java` and run `make test`
-
-## Misc:
-
-- `make test` above will make sure that `rename` is compiled. It then invokes
-`autopatch.sh`. 
-
-- a `sed` command has to replace placeholders once everything is copied to a 
-fresh infer install for: (1) the rename command invoked in `footpatch_utils.ml`
-and (2) the path that `rename` must `cd` to because CLASSPATH is relative.
-
-
-## Deps
+You need at least the following dependencies:
 
 ```
-# Installed packages for infer-4.02.3:
-ANSITerminal          0.7  Basic control of ANSI compliant terminals and the windows shell.
-atd                 1.2.0  Parser for the ATD data format description language
-atdgen             1.10.0  Generates efficient JSON serializers, deserializers and validators
-base-bigarray        base  Bigarray library distributed with the OCaml compiler
-base-bytes           base  Bytes library distributed with the OCaml compiler
-base-ocamlbuild      base  OCamlbuild binary and libraries distributed with the OCaml compiler
-base-threads         base  Threads library distributed with the OCaml compiler
-base-unix            base  Unix library distributed with the OCaml compiler
-BetterErrors        0.0.1  Better compiler error output.
-biniou             1.0.12  Binary data format designed for speed, safety, ease of use and backward compatibility as protocols evolve
-camlp4             4.02+7  Camlp4 is a system for writing extensible parsers for programming languages
-camlzip              1.05  Provides easy access to compressed files in ZIP, GZIP and JAR format
-camomile            0.8.5  A comprehensive Unicode library
-conf-autoconf         0.1  Virtual package relying on autoconf installation.
-conf-m4                 1  Virtual package relying on m4
-conf-ncurses            1  Virtual package relying on ncurses
-conf-pkg-config       1.0  Virtual package relying on pkg-config installation.
-conf-which              1  Virtual package relying on which
-cppo                1.4.1  Equivalent of the C preprocessor for OCaml programs
-easy-format         1.2.0  High-level and functional interface to the Format module of the OCaml standard library
-extlib              1.5.4  A complete yet small extension for OCaml standard library
-javalib             2.3.1  Javalib is a library written in OCaml which aims at providing a high level representation of Java .class files.
-lambda-term        1.10.1  Terminal manipulation library for OCaml
-lwt                 2.4.5  A cooperative threads library for OCaml
-menhir           20170101  LR(1) parser generator
-merlin              2.3.1 (pinned)  Editor helper, provides completion, typing and source browsing in Vim and Emacs
-merlin_extend         0.2 (pinned)  
-ocamlbuild              0  Build system distributed with the OCaml compiler since OCaml 3.10.0
-ocamlfind           1.7.1  A library manager for OCaml
-ounit               2.0.0  Unit testing framework loosely based on HUnit. It is similar to JUnit, and other XUnit testing frameworks
-re                  1.7.1  RE is a regular expression library for OCaml
-react               1.2.0  Declarative events and signals for OCaml
-reason              0.0.5 (pinned)  Reason: Meta Language Toolchain
-sawja               1.5.1  Provide a high level representation of Java bytecode programs and static analysis tools.
-utop               1.19.3  Universal toplevel for OCaml
-yojson              1.3.3  Yojson is an optimized parsing and printing library for the JSON format 
-zed                   1.4  Abstract engine for text edition in OCaml
+# install opam
+add-apt-repository ppa:avsm/ppa
+apt-get update
+apt-get install opam
+
+# additional deps
+opam depext conf-autoconf.0.1
+opam depext conf-m4.1
+opam depext camlzip.1.05
+
+# java
+sudo apt-get install default-jdk
+sudo apt-get install default-jre
+
+```
+
+For projects tested, you need to do at least:
+
+```
+
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test 
+sudo apt-get update
+sudo apt-get install --only-upgrade libstdc++6
+
+sudo add-apt-repository ppa:webupd8team/java
+sudo apt-get update
+sudo apt-get install oracle-java8-installer
+sudo apt-get install gradle
+
+sudo apt-get install clang
+sudo apt-get install subversion
+```
+
+## Known good package versions
+
+These package versions are known to be good for the source build release, but
+may have updated constraints in opam that make it hard to obtain this configuration.
+
+```
+# Installed packages for infer-4.02.3:                                              
+ANSITerminal              0.7  Basic control of ANSI compliant terminals and the
+atd                     1.2.0  Parser for the ATD data format description langua
+atdgen                 1.10.0  Generates efficient JSON serializers, deserialize
+base-bigarray            base  Bigarray library distributed with the OCaml compi
+base-bytes               base  Bytes library distributed with the OCaml compiler
+base-ocamlbuild          base  OCamlbuild binary and libraries distributed with 
+base-threads             base  Threads library distributed with the OCaml compil
+base-unix                base  Unix library distributed with the OCaml compiler 
+BetterErrors            0.0.1  Better compiler error output.                        
+bin_prot            113.33.03  A binary protocol generator                          
+biniou                 1.0.12  Binary data format designed for speed, safety, ea
+camlp4                 4.02+7  Camlp4 is a system for writing extensible parsers
+camlzip                  1.05  Provides easy access to compressed files in ZIP, 
+camomile                0.8.5  A comprehensive Unicode library                      
+conf-autoconf             0.1  Virtual package relying on autoconf installation.
+conf-m4                     1  Virtual package relying on m4                        
+conf-ncurses                1  Virtual package relying on ncurses                   
+conf-pkg-config           1.0  Virtual package relying on pkg-config installatio
+conf-which                  1  Virtual package relying on which                     
+core                113.33.03  Industrial strength alternative to OCaml's standa
+core_kernel         113.33.03  Industrial strength alternative to OCaml's standa
+cppo                    1.4.1  Equivalent of the C preprocessor for OCaml progra
+ctypes                 0.12.1  Combinators for binding to C libraries without wr
+ctypes-foreign          0.4.0  Virtual package for enabling the ctypes.foreign s
+easy-format             1.2.0  High-level and functional interface to the Format
+extlib-compat           1.7.2  A complete yet small extension for OCaml standard
+fieldslib           113.33.03  Syntax extension to define first class values rep
+integers                0.2.2  Various signed and unsigned integer types for OCa
+javalib                 2.3.3  Javalib is a library written in OCaml with the ai
+js-build-tools      113.33.04  Collection of tools to help building Jane Street 
+lambda-term            1.10.1  Terminal manipulation library for OCaml              
+lwt                     2.4.5  A cooperative threads library for OCaml              
+menhir               20170101  LR(1) parser generator                               
+merlin                  2.5.5  Editor helper, provides completion, typing and so
+merlin-extend             0.3  A protocol to provide custom frontend to Merlin  
+merlin_extend             0.2 (pinned)                                              
+ocamlbuild                  0  Build system distributed with the OCaml compiler 
+ocamlfind               1.7.1  A library manager for OCaml                          
+ounit                   2.0.0  Unit testing framework loosely based on HUnit. It
+ppx_assert          113.33.03  Assert-like extension nodes that raise useful err
+ppx_bench           113.33.03  Syntax extension for writing in-line benchmarks i
+ppx_bin_prot        113.33.03  Generation of bin_prot readers and writers from
+ppx_compare         113.33.03  Generation of comparison functions from types    
+ppx_core            113.33.03  Standard library for ppx rewriters               
+ppx_custom_printf   113.33.03  Printf-style format-strings for user-defined stri
+ppx_deriving              4.1  Type-driven code generation for OCaml >=4.02     
+ppx_driver          113.33.04  Feature-full driver for OCaml AST transformers   
+ppx_enumerate       113.33.03  Generate a list containing all values of a finite
+ppx_expect          113.33.03  Cram like framework for OCaml                    
+ppx_fail            113.33.03  Add location to calls to failwiths               
+ppx_fields_conv     113.33.03  Generation of accessor and iteration functions fo
+ppx_here            113.33.03  Expands [%here] into its location                
+ppx_inline_test     113.33.03  Syntax extension for writing in-line tests in oca
+ppx_jane            113.33.03  Standard Jane Street ppx rewriters               
+ppx_let             113.33.03  Monadic let-bindings                             
+ppx_optcomp         113.33.03  Optional compilation for OCaml                   
+ppx_pipebang        113.33.03  A ppx rewriter that inlines reverse application o
+ppx_sexp_conv       113.33.03  Generation of S-expression conversion functions f
+ppx_sexp_message    113.33.03  A ppx rewriter for easy construction of s-express
+ppx_sexp_value      113.33.03  A ppx rewriter that simplifies building s-express
+ppx_tools          5.0+4.02.0  Tools for authors of ppx rewriters and other synt
+ppx_type_conv       113.33.03  Support Library for type-driven code generators  
+ppx_typerep_conv    113.33.03  Generation of runtime types from type declaration
+ppx_variants_conv   113.33.03  Generation of accessor and iteration functions fo
+re                      1.7.1  RE is a regular expression library for OCaml     
+react                   1.2.0  Declarative events and signals for OCaml         
+reason                  1.4.0  Reason: Meta Language Toolchain                  
+result                    1.2  Compatibility Result module                      
+sawja                   1.5.2  Provide a high level representation of Java bytec
+sexplib             113.33.03  Library for serializing OCaml values to and from 
+topkg                   0.9.0  The transitory OCaml software packager           
+typerep             113.33.03  typerep is a library for runtime types.          
+utop                   1.19.3  Universal toplevel for OCaml                     
+variantslib         113.33.03  Part of Jane Street's Core library               
+xmlm                    1.3.0  Streaming XML codec for OCaml                    
+yojson                  1.3.3  Yojson is an optimized parsing and printing libra
+zed                       1.4  Abstract engine for text edition in OCaml
 ```
 
 ```
-rvt:~/ $ opam pin list                                                                                                                                                  [3:12:22]
-infer-deps-9FN6.0.9.3   (uninstalled)  path  /home/rvt/infer-linux64-v0.9.3/infer-deps-9FN6              
-infer-deps-NFk6.0.9.3   (uninstalled)  path  /home/rvt/infer-linux64-v0.9.3/infer-deps-NFk6              
-infer-deps-UeYt.0.9.3   (uninstalled)  path  /home/rvt/infer-linux64-v0.9.3/infer-deps-UeYt              
-infer-deps-XkOt.0.9.3   (uninstalled)  path  /home/rvt/infer-linux64-v0.9.3/infer-deps-XkOt              
-merlin.2.3.1                           git   https://github.com/the-lambda-church/merlin.git#reason-0.0.1
-merlin_extend.0.2                      git   https://github.com/let-def/merlin-extend.git#reason-0.0.1   
-reason.0.0.5                           git   https://github.com/jberdine/reason.git#infer 
+merlin_extend.0.2                      git   https://github.com/let-def/merlin-extend.git#reason-0.0.1
 ```
