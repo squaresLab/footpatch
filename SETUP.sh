@@ -13,7 +13,7 @@ printf "#\!/bin/bash\n\nINFER="$(pwd)/${INFER}"\n" > CONFIG
 ./MERGE.sh
 
 # configure and make infer. ASSUMES OPAM SWITCH AND DEPS WORK.
-cp build-infer.sh $INFER/
+# cp build-infer.sh $INFER/
 cd $INFER
 ./build-infer.sh
 cd ..
