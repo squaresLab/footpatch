@@ -6,7 +6,7 @@ disappeared, and can cause building from source to be problematic.
 
 If you really want to build from source, here is some guidance.
 Building is only tested on Ubuntu 14.04 and Infer v0.9.3. There is
-no support for other versions of Infer at this time. Install the [dependencies](#depencies)
+no support for other versions of Infer at this time. Install the [dependencies](#dependencies)
 
 If you have all the dependencies installed, running `./SETUP.sh` should be
 enough.
