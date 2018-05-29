@@ -1,15 +1,21 @@
 # Build from source
 
-It is recommended you use the VM image with pre-built support for source
-builds. Dependencies for olders versions of Infer can (and have) broken or
+If you just want to play with running footpatch (and possibly hacking at the code),
+use the [VM](#vm-download). Dependencies for olders versions of Infer can (and have) broken or
 disappeared, and can cause building from source to be problematic. 
 
-If you do not want to go this route, here is some guidance, but it may become
-outdated.  Building is only tested on Ubuntu 14.04 and Infer v0.9.3.  There is
-no support for other versions of Infer at this time.
+If you really want to build from source, here is some guidance.
+Building is only tested on Ubuntu 14.04 and Infer v0.9.3. There is
+no support for other versions of Infer at this time. Install the [dependencies](#depencies-)
 
 If you have all the dependencies installed, running `./SETUP.sh` should be
 enough.
+
+# VM Download
+
+Download each of `footpatch-*` and run `cat footpatch-aa footpatch-ab footpatch-ac footpatch-ad > footpatch.vmdk`. Add the vmdk image in VirtualBox or VMware. Username/password is `vagrant/vagrant`.
+
+# Dependencies
 
 You need at least the following dependencies:
 
