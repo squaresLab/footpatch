@@ -6,14 +6,14 @@ disappeared, and can cause building from source to be problematic.
 
 If you really want to build from source, here is some guidance.
 Building is only tested on Ubuntu 14.04 and Infer v0.9.3. There is
-no support for other versions of Infer at this time. Install the [dependencies](#depencies-)
+no support for other versions of Infer at this time. Install the [dependencies](#depencies)
 
 If you have all the dependencies installed, running `./SETUP.sh` should be
 enough.
 
 # VM Download
 
-[Download](https://cmu.app.box.com/folder/49829506636) each of `footpatch-*` and run `cat footpatch-aa footpatch-ab footpatch-ac footpatch-ad > footpatch.vmdk`. Add the vmdk image in VirtualBox or VMware. Username/password is `vagrant/vagrant`.
+[Download](https://cmu.app.box.com/s/7haz7ulzw5ebdxhobbnfv2guyarwtnpm) each of `footpatch-*` and run `cat footpatch-aa footpatch-ab footpatch-ac footpatch-ad > footpatch.vmdk`. Add the vmdk image in VirtualBox or VMware. Username/password is `vagrant/vagrant`.
 
 # Dependencies
 
