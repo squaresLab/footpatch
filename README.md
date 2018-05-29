@@ -13,7 +13,7 @@ enough.
 
 # VM Download
 
-Download each of `footpatch-*` and run `cat footpatch-aa footpatch-ab footpatch-ac footpatch-ad > footpatch.vmdk`. Add the vmdk image in VirtualBox or VMware. Username/password is `vagrant/vagrant`.
+[Download](https://cmu.app.box.com/folder/49829506636) each of `footpatch-*` and run `cat footpatch-aa footpatch-ab footpatch-ac footpatch-ad > footpatch.vmdk`. Add the vmdk image in VirtualBox or VMware. Username/password is `vagrant/vagrant`.
 
 # Dependencies
 
