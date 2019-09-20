@@ -1,3 +1,7 @@
+# VM Download
+
+The [Footpatch VM is hosted on Zenodo](https://zenodo.org/record/3440280#.XYUJSpNKiu4). The username/password is **vagrant/vagrant**.
+
 # Build from source
 
 If you just want to play with running footpatch (and possibly hacking at the code),
@@ -11,9 +15,6 @@ no support for other versions of Infer at this time. Install the [dependencies](
 If you have all the dependencies installed, running `./SETUP.sh` should be
 enough.
 
-# VM Download
-
-[Download](https://cmu.app.box.com/s/7haz7ulzw5ebdxhobbnfv2guyarwtnpm) each of `footpatch-*` and run `cat footpatch-aa footpatch-ab footpatch-ac footpatch-ad > footpatch.vmdk`. Add the vmdk image in VirtualBox or VMware. Username/password is `vagrant/vagrant`.
 
 # Dependencies
 
